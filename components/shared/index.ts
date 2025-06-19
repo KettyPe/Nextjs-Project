@@ -7,4 +7,5 @@ export { TopBar } from "./top-bar"
 export { Filters } from "./filters/filters"
 export { FilterCheckbox } from "./filters/filter-checkbox"
 export { RangeSlider } from "./filters/range-slider"
+export { CheckboxFiltersGroup } from "./filters/checkbox-filters-group"
 
