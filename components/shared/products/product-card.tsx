@@ -1,6 +1,6 @@
-import { Title } from "./title"
+import { Title } from "../title"
 import { Plus } from "lucide-react"
-import { Button } from "../ui"
+import { Button } from "../../ui"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import React from "react"

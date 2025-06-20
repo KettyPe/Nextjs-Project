@@ -52,8 +52,7 @@ const products = [
           id: 9,
           value: "6",
           text: "Кетчуп"
-     },
-     
+     }, 
 ]
 
 
