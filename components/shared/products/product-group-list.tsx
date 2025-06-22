@@ -1,5 +1,6 @@
 'use client'
 
+import { useCategoryState } from "@/store/category"
 import { ProductCard } from "@/components/shared/products/product-card"
 import { Title } from "@/components/shared/title"
 import { useIntersection } from 'react-use'
@@ -21,6 +22,7 @@ export const ProductGroupList: React.FC<Props> = ({
      className,
      listclassName
 }) => {
+     const setActiveCategoryId = useCategoryState((state) => state.setActiveId)
      const intersectionRef = React.useRef<HTMLDivElement>(null)
      const intersection = useIntersection(intersectionRef as React.RefObject<HTMLDivElement>, {
           threshold: 0.4
@@ -28,7 +30,7 @@ export const ProductGroupList: React.FC<Props> = ({
 
      React.useEffect(() => {
           if (intersection?.isIntersecting) {
-               console.log(title, categoryId)
+               setActiveCategoryId(categoryId)
           }
      }, [categoryId, intersection?.isIntersecting, title])
 
