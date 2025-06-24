@@ -26,7 +26,7 @@ async function down() {
      // await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`
      // await prisma.$executeRaw`DELETE FROM "User"`
      // await prisma.$executeRaw`ALTER SEQUENCE "User_id_seq" RESTART WITH 1`
-     await prisma.user.deleteMany({})
+     await prisma.user.deleteMany({}) // минус в том, что при удалении юзера, id остаётся тот же
 }
 
 async function main() {
