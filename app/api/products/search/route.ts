@@ -1,6 +1,5 @@
-import { prisma } from "@/prisma/prisma-client";
-import { NextRequest, NextResponse } from "next/server";
-
+import { prisma } from '@/prisma/prisma-client'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
      const query = req.nextUrl.searchParams.get('query') || '';
@@ -15,5 +14,5 @@ export async function GET(req: NextRequest) {
           take: 5
      })
 
-     return NextResponse.json({products})
+     return NextResponse.json(products)
 }
