@@ -1,5 +1,8 @@
+'use client'
+
 import { CheckboxFiltersGroup, FilterCheckbox, RangeSlider, Title } from "@/components/shared"
 import { Input } from "@/components/ui/input"
+import { useFilterIngredients } from "@/hook/useFilterIngredients";
 import { cn } from "@/lib/utils"
 import React from "react";
 
@@ -38,7 +41,7 @@ const products = [
           value: "6",
           text: "Кетчуп"
      },
-          {
+     {
           id: 7,
           value: "4",
           text: "Соленые огурчики"
@@ -52,11 +55,13 @@ const products = [
           id: 9,
           value: "6",
           text: "Кетчуп"
-     }, 
+     },
 ]
 
 
 export const Filters: React.FC<Props> = ({ className }) => {
+     const { ingredients } = useFilterIngredients()
+
      return (
           <div className={cn('', className)}>
                <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
@@ -76,8 +81,12 @@ export const Filters: React.FC<Props> = ({ className }) => {
                </div>
 
                <div className="mt-5">
-                    <CheckboxFiltersGroup title="Список товаров" limit={6} items={products} defaultItems={products}/>
-
+                    <CheckboxFiltersGroup
+                         title="Список товаров"
+                         limit={6}
+                         items={products}
+                         defaultItems={products}
+                    />
                </div>
           </div>
      )
