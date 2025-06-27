@@ -6,6 +6,7 @@ import {
   RangeSlider,
   Title,
 } from "@/components/shared";
+import { productsList } from "@/components/data"
 import { Input } from "@/components/ui/input";
 import { useFilterIngredients } from "@/hook/useFilterIngredients";
 import { cn } from "@/lib/utils";
@@ -15,56 +16,11 @@ interface Props {
   className?: string;
 }
 
-const products = [
-  {
-    id: 1,
-    value: "1",
-    text: "Сырный соус",
-  },
-  {
-    id: 2,
-    value: "2",
-    text: "Пепперони",
-  },
-  {
-    id: 3,
-    value: "3",
-    text: "Чеснок",
-  },
-  {
-    id: 4,
-    value: "4",
-    text: "Соленые огурчики",
-  },
-  {
-    id: 5,
-    value: "5",
-    text: "Газировка",
-  },
-  {
-    id: 6,
-    value: "6",
-    text: "Кетчуп",
-  },
-  {
-    id: 7,
-    value: "4",
-    text: "Соленые огурчики",
-  },
-  {
-    id: 8,
-    value: "5",
-    text: "Газировка",
-  },
-  {
-    id: 9,
-    value: "6",
-    text: "Кетчуп",
-  },
-];
-
 export const Filters: React.FC<Props> = ({ className }) => {
   const { ingredients } = useFilterIngredients();
+
+  const itemsIngredients = ingredients.map((item) => ({ value: String(item.id), text: item.name }
+  ))
 
   return (
     <div className={cn("", className)}>
@@ -94,8 +50,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
         <CheckboxFiltersGroup
           title="Список товаров"
           limit={6}
-          items={products}
-          defaultItems={products}
+          items={productsList}
+          defaultItems={itemsIngredients.slice(0, 6)}
         />
       </div>
     </div>
