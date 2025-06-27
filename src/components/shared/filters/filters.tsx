@@ -6,7 +6,7 @@ import {
   RangeSlider,
   Title,
 } from "@/components/shared";
-import { productsList } from "@/components/data"
+import { productsList } from "@/components/data";
 import { Input } from "@/components/ui/input";
 import { useFilterIngredients } from "@/hook/useFilterIngredients";
 import { cn } from "@/lib/utils";
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
-  const { ingredients } = useFilterIngredients();
+  const { ingredients, loading } = useFilterIngredients();
 
   const itemsIngredients = ingredients.map((item) => ({ value: String(item.id), text: item.name }
   ))
@@ -52,6 +52,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
           limit={6}
           items={productsList}
           defaultItems={itemsIngredients.slice(0, 6)}
+          loading={loading}
         />
       </div>
     </div>
