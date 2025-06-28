@@ -8,14 +8,14 @@ import React from "react";
 interface Props {
   ingredients: Ingredient[];
   loading: boolean;
-  selectedIds: Set<string>;
+  selectedIngredients: Set<string>;
   onAddId: (id: string) => void
 }
 
 export const useFilterIngredients = (): Props => {
   const [ingredients, setIngredients] = React.useState<Ingredient[]>([]);
   const [loading, setLoading] = React.useState(true)
-  const [selectedIds, { toggle }] = useSet(new Set<string>([]))
+  const [selectedValues, { toggle }] = useSet(new Set<string>([]))
 
   React.useEffect(() => {
     async function fetchIngredients() {
@@ -33,5 +33,5 @@ export const useFilterIngredients = (): Props => {
     fetchIngredients();
   }, []);
 
-  return { ingredients, loading, onAddId: toggle, selectedIds };
+  return { ingredients, loading, onAddId: toggle, selectedIngredients: selectedValues};
 };
