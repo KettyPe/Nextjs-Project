@@ -70,3 +70,14 @@ export const productsList = [
           text: "Кетчуп",
      },
 ];
+
+export const checkboxFilterSizeList = [
+     { text: '20 см', value: '20' },
+     { text: '30 см', value: '30' },
+     { text: '40 см', value: '40' },
+]
+
+export const typeOfTestPizzaList = [
+     { text: 'Тонкое', value: '1' },
+     { text: 'Традиционное', value: '2' },
+]
