@@ -1,10 +1,10 @@
 "use client";
 
+import { Skeleton } from "@/components/ui";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { FilterCheckbox, FilterCheckboxProps } from "./filter-checkbox";
-import { Skeleton } from "@/components/ui";
 
 type Item = FilterCheckboxProps;
 
@@ -41,16 +41,18 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
     setSearchValue(e.target.value);
   };
 
-  if(loading) {
+  if (loading) {
     return (
       <div className={cn("", className)}>
         <p className="mb-3 font-bold">{title}</p>
 
-        {...Array(limit).fill(0).map((_, index) => <Skeleton key={index} className="h-6 mb-5" />)}
+        {...Array(limit)
+          .fill(0)
+          .map((_, index) => <Skeleton key={index} className="mb-5 h-6" />)}
 
-        <Skeleton className="w-28 h-6 mb-5" />
+        <Skeleton className="mb-5 h-6 w-28" />
       </div>
-    )
+    );
   }
 
   const list = showAll
