@@ -1,14 +1,13 @@
-import { Header } from '@/components/shared';
-import type { Metadata } from 'next';
-import { Suspense } from 'react';
+import { Header } from "@/components/shared";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Next Pizza | Главная',
+  title: "Next Pizza | Главная",
 };
 
 export default function HomeLayout({
   children,
-  modal
+  modal,
 }: Readonly<{
   children: React.ReactNode;
   modal: React.ReactNode;

@@ -5,11 +5,11 @@ export { FilterCheckbox } from "./filters/filter-checkbox";
 export { Filters } from "./filters/filters";
 export { RangeSlider } from "./filters/range-slider";
 export { Header } from "./header";
+export * from "./modals";
 export { ProductCard } from "./products/product-card";
+export { ProductGroupVariants } from "./products/product-group-variants";
+export { ProductImage } from "./products/product-image";
 export { SearchInput } from "./search-input";
 export { SortPopup } from "./sort-popup";
 export { Title } from "./title";
 export { TopBar } from "./top-bar";
-export { ProductImage } from "./products/product-image";
-export { ProductGroupVariants } from "./products/product-group-variants";
-export * from "./modals"
