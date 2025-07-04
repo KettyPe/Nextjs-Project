@@ -43,8 +43,8 @@ export default async function ProductPage({
             items={ProductGroupVariantsList}
           />
         </div>
+        
       </div>
-
     </Container>
   );
 }
