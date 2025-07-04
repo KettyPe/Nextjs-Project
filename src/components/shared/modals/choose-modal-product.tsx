@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { Product } from "@prisma/client"
 import { Title } from '../title';
 import { useRouter } from 'next/navigation';
+import { ChooseProductForm } from '@/components/shared/modals-content';
 
 interface Props {
      product: Product
@@ -19,7 +20,9 @@ export const ChooseModalProduct = ({ product, className}: Props) => {
                     'p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden', 
                     className
                )}>
-                    <DialogTitle>{product.name}</DialogTitle>
+                    <DialogTitle className='hidden'>{product.name}</DialogTitle>
+
+                    <ChooseProductForm imageUrl={product.imageUrl} name={product.name}/>
                </DialogContent>
           </Dialog>
      )

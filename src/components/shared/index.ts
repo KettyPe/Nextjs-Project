@@ -13,3 +13,4 @@ export { TopBar } from "./top-bar";
 export { ProductImage } from "./products/product-image";
 export { ProductGroupVariants } from "./products/product-group-variants";
 export * from "./modals"
+export * from "./modals-content"
