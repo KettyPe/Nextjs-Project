@@ -3,7 +3,7 @@
 import { ProductCard } from "@/components/shared/products/product-card";
 import { Title } from "@/components/shared/title";
 import { cn } from "@/lib/utils";
-import { useCategoryState } from "@/store/category";
+import { useCategoryState } from "@/shared/store/category";
 import React from "react";
 import { useIntersection } from "react-use";
 

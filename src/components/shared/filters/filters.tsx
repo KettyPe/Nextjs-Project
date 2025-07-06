@@ -6,7 +6,7 @@ import {
 } from "@/components/data";
 import { CheckboxFiltersGroup, RangeSlider, Title } from "@/components/shared";
 import { Input } from "@/components/ui/input";
-import { useFilters, useIngredients, useQueryFilters } from "@/hook/index";
+import { useFilters, useIngredients, useQueryFilters } from "@/shared/hook/index";
 import { cn } from "@/lib/utils";
 import React from "react";
 
