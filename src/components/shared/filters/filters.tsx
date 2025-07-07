@@ -6,8 +6,12 @@ import {
 } from "@/components/data";
 import { CheckboxFiltersGroup, RangeSlider, Title } from "@/components/shared";
 import { Input } from "@/components/ui/input";
-import { useFilters, useIngredients, useQueryFilters } from "@/shared/hook/index";
 import { cn } from "@/lib/utils";
+import {
+  useFilters,
+  useIngredients,
+  useQueryFilters,
+} from "@/shared/hook/index";
 import React from "react";
 
 interface Props {
@@ -16,7 +20,7 @@ interface Props {
 
 export const Filters: React.FC<Props> = ({ className }) => {
   const { ingredients, loading } = useIngredients();
-  
+
   const filters = useFilters();
   useQueryFilters(filters);
 
@@ -37,9 +41,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
   } = filters;
 
   const updatePrice = (prices: number[]) => {
-    filters.setPrices('priceFrom', prices[0]);
-    filters.setPrices('priceTo', prices[1]);
-  }
+    filters.setPrices("priceFrom", prices[0]);
+    filters.setPrices("priceTo", prices[1]);
+  };
 
   return (
     <div className={cn("", className)}>
@@ -87,7 +91,10 @@ export const Filters: React.FC<Props> = ({ className }) => {
           min={0}
           max={1000}
           step={10}
-          value={[filters.prices.priceFrom || 0, filters.prices.priceTo || 1000]}
+          value={[
+            filters.prices.priceFrom || 0,
+            filters.prices.priceTo || 1000,
+          ]}
           onValueChange={updatePrice}
         />
       </div>

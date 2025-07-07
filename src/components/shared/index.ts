@@ -5,12 +5,13 @@ export { FilterCheckbox } from "./filters/filter-checkbox";
 export { Filters } from "./filters/filters";
 export { RangeSlider } from "./filters/range-slider";
 export { Header } from "./header";
+export { IngredientItem } from "./ingredient-item";
+export * from "./modals";
+export * from "./modals-content-form";
+export { PizzaImage } from "./products/pizza-image";
 export { ProductCard } from "./products/product-card";
+export { ProductGroupVariants } from "./products/product-group-variants";
 export { SearchInput } from "./search-input";
 export { SortPopup } from "./sort-popup";
 export { Title } from "./title";
 export { TopBar } from "./top-bar";
-export { ProductImage } from "./products/product-image";
-export { ProductGroupVariants } from "./products/product-group-variants";
-export * from "./modals"
-export * from "./modals-content"

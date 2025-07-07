@@ -1,29 +1,44 @@
-'use client'
+"use client";
 
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
-import { cn } from '@/lib/utils';
-import { Product } from "@prisma/client"
-import { Title } from '../title';
-import { useRouter } from 'next/navigation';
-import { ChooseProductForm } from '@/components/shared/modals-content';
+import { ProductWithRelations } from "@/@types/prisma";
+import {
+  ChoosePizzaForm,
+  ChooseProductForm,
+} from "@/components/shared/modals-content-form";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface Props {
-     product: Product
-     className?: string
+  product: ProductWithRelations;
+  className?: string;
 }
 
-export const ChooseModalProduct = ({ product, className}: Props) => {
-     const router = useRouter()
-     return (
-          <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
-               <DialogContent className={cn(
-                    'p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden', 
-                    className
-               )}>
-                    <DialogTitle className='hidden'>{product.name}</DialogTitle>
+export const ChooseModalProduct = ({ product, className }: Props) => {
+  const router = useRouter();
+  const isPizzaForm = Boolean(product.items[0].pizzaType);
 
-                    <ChooseProductForm imageUrl={product.imageUrl} name={product.name}/>
-               </DialogContent>
-          </Dialog>
-     )
-}
+  return (
+    <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
+      <DialogContent
+        className={cn(
+          "min-h-[500px] w-[1060px] max-w-[1060px] overflow-hidden bg-white p-0",
+          className
+        )}
+      >
+        <DialogTitle className="hidden">{product.name}</DialogTitle>
+
+        {isPizzaForm ? (
+          <ChoosePizzaForm
+            imageUrl={product.imageUrl}
+            name={product.name}
+            ingredients={product.ingredients}
+            items={product.items}
+          />
+        ) : (
+          <ChooseProductForm imageUrl={product.imageUrl} name={product.name} />
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+};

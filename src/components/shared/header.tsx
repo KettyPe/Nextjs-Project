@@ -46,7 +46,10 @@ export const Header: React.FC<Props> = ({ className }) => {
               </div>
               <ArrowRight
                 size={20}
-                className="absolute right-5 -translate-x-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                className={cn(
+                  "absolute right-5 -translate-x-2 opacity-0 transition",
+                  "duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                )}
               />
             </Button>
           </div>
