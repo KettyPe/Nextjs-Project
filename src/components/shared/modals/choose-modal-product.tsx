@@ -1,14 +1,4 @@
 "use client";
-
-<<<<<<< HEAD
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
-import { Product } from "@prisma/client";
-import { useRouter } from "next/navigation";
-
-interface Props {
-  product: Product;
-=======
 import { ProductWithRelations } from "@/@types/prisma";
 import {
   ChoosePizzaForm,
@@ -20,17 +10,14 @@ import { useRouter } from "next/navigation";
 
 interface Props {
   product: ProductWithRelations;
->>>>>>> modal-product-content
   className?: string;
 }
 
 export const ChooseModalProduct = ({ product, className }: Props) => {
   const router = useRouter();
-<<<<<<< HEAD
-=======
+
   const isPizzaForm = Boolean(product.items[0].pizzaType);
 
->>>>>>> modal-product-content
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
       <DialogContent
@@ -39,9 +26,6 @@ export const ChooseModalProduct = ({ product, className }: Props) => {
           className
         )}
       >
-<<<<<<< HEAD
-        <DialogTitle>{product.name}</DialogTitle>
-=======
         <DialogTitle className="hidden">{product.name}</DialogTitle>
 
         {isPizzaForm ? (
@@ -54,7 +38,6 @@ export const ChooseModalProduct = ({ product, className }: Props) => {
         ) : (
           <ChooseProductForm imageUrl={product.imageUrl} name={product.name} />
         )}
->>>>>>> modal-product-content
       </DialogContent>
     </Dialog>
   );
