@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 
-interface VariantProps {
+export interface VariantProps {
   name: string;
   value: string;
   disabled?: boolean;

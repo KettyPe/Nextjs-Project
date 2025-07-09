@@ -1,18 +1,13 @@
-import { IngredientItem, Title } from "@/components/shared";
-import { PizzaImage } from "@/components/shared/products/pizza-image";
 import { ProductGroupVariants } from "@/components/shared/products/product-group-variants";
+import { PizzaSizes, PizzaType, pizzaType } from "@/shared/constants/pizza";
+import { PizzaImage } from "@/components/shared/products/pizza-image";
+import { IngredientItem, Title } from "@/components/shared";
+import { usePizzaOptions } from "@/hook/use-pizza-options";
+import { getPizzaDetails } from "@/lib";
+import { Ingredient, ProductItem } from "@prisma/client";
 import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
-import {
-  mapPizzaType,
-  PizzaSizes,
-  pizzaSizes,
-  PizzaType,
-  pizzaType,
-} from "@/shared/constants/pizza";
-import { Ingredient, ProductItem } from "@prisma/client";
 import React from "react";
-import { useSet } from "react-use";
 
 interface Props {
   imageUrl: string;
@@ -33,21 +28,24 @@ export const ChoosePizzaForm = ({
   className,
   loading,
 }: Props) => {
-  const [size, setSize] = React.useState<PizzaSizes>(20);
-  const [type, setType] = React.useState<PizzaType>(1);
-  const [selectedIngredients, { toggle: addIngredient }] = useSet(
-    new Set<number>([])
-  );
+  const {
+    size,
+    type,
+    selectedIngredients,
+    availableSizes,
+    currentItemId,
+    setSize,
+    setType,
+    addIngredient,
+  } = usePizzaOptions(items);
 
-  const pizzaPrice =
-    items.find((item) => item.pizzaType === type && item.size === size)
-      ?.price || 0;
-
-  const totalIngredientsPrice = ingredients
-    .filter((ingredient) => selectedIngredients.has(ingredient.id))
-    .reduce((acc, ingredient) => acc + ingredient.price, 0);
-
-  const totalPrice = pizzaPrice + totalIngredientsPrice;
+  const { descriptionPizza, totalPrice } = getPizzaDetails({
+    items,
+    ingredients,
+    type,
+    size,
+    selectedIngredients
+  })
 
   const handleClickAdd = () => {
     onClickAddCart?.();
@@ -57,29 +55,6 @@ export const ChoosePizzaForm = ({
       ingredients: selectedIngredients,
     });
   };
-
-  const descriptionPizza = `${size} см, ${mapPizzaType[type]} пицца`;
-
-  const availablePizzas = items.filter((item) => item.pizzaType === type);
-  const availablePizzaSizes = pizzaSizes.map((item) => ({
-    name: item.name,
-    value: item.value,
-    disabled: !availablePizzas.some(
-      (pizza) => Number(pizza.size) === Number(item.value)
-    ),
-  }));
-
-  React.useEffect(() => {
-    const isAvailableSize = availablePizzaSizes?.find((item) => {
-      Number(item.value) === size && !item.disabled;
-    });
-
-    const availableSizes = availablePizzaSizes?.find((item) => !item.disabled);
-
-    if (!isAvailableSize && availableSizes) {
-      setSize(Number(availableSizes.value) as PizzaSizes);
-    }
-  }, [type]);
 
   return (
     <div className={cn("flex flex-1", className)}>
@@ -93,7 +68,7 @@ export const ChoosePizzaForm = ({
 
           <div className="mt-5 flex flex-col gap-3">
             <ProductGroupVariants
-              items={availablePizzaSizes}
+              items={availableSizes}
               value={String(size)}
               onClick={(value) => setSize(Number(value) as PizzaSizes)}
             />
@@ -104,23 +79,11 @@ export const ChoosePizzaForm = ({
             />
           </div>
 
-          <div className="scrollbar mt-5 h-[420px] overflow-auto rounded-md bg-gray-50 p-5">
-            <div className="grid grid-cols-3 gap-3">
-              {ingredients.map((ingredient, id) => {
-                const { id: ingredientId, name, price, imageUrl } = ingredient;
-                return (
-                  <IngredientItem
-                    key={ingredientId}
-                    name={name}
-                    price={price}
-                    imageUrl={imageUrl}
-                    onClick={() => addIngredient(ingredientId)}
-                    active={selectedIngredients.has(ingredientId)}
-                  />
-                );
-              })}
-            </div>
-          </div>
+          <IngredientsList
+            ingredients={ingredients}
+            addIngredient={addIngredient}
+            selectedIngredients={selectedIngredients}
+          />
 
           <Button
             onClick={handleClickAdd}
@@ -133,3 +96,34 @@ export const ChoosePizzaForm = ({
     </div>
   );
 };
+
+
+const IngredientsList = ({
+  ingredients,
+  addIngredient,
+  selectedIngredients
+}: {
+  ingredients: Ingredient[];
+  addIngredient: (value: number) => void;
+  selectedIngredients: Set<number>
+}) => {
+  return (
+    <div className="scrollbar mt-5 h-[420px] overflow-auto rounded-md bg-gray-50 p-5">
+      <div className="grid grid-cols-3 gap-3">
+        {ingredients.map((ingredient, id) => {
+          const { id: ingredientId, name, price, imageUrl } = ingredient;
+          return (
+            <IngredientItem
+              key={ingredientId}
+              name={name}
+              price={price}
+              imageUrl={imageUrl}
+              onClick={() => addIngredient(ingredientId)}
+              active={selectedIngredients.has(ingredientId)}
+            />
+          );
+        })}
+      </div>
+    </div>
+  )
+}
