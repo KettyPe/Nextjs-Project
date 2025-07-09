@@ -23,11 +23,11 @@ const ProductGroupVariantsList = [
 ];
 
 export default async function ProductPage({
-  params
+  params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
+  const { id } = await params;
 
   const product = await prisma.product.findFirst({
     where: { id: Number(id) },
@@ -49,10 +49,7 @@ export default async function ProductPage({
             className="mb-1 font-extrabold"
           />
 
-          <ProductGroupVariants
-            value="2"
-            items={ProductGroupVariantsList}
-          />
+          <ProductGroupVariants value="2" items={ProductGroupVariantsList} />
         </div>
       </div>
     </Container>
