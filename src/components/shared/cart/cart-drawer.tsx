@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from "@/components/ui"
 import {
      Sheet,
@@ -12,6 +14,8 @@ import {
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { PropsWithChildren } from "react"
+import { CartDrawerItem } from "@/components/shared/cart/cart-drawer-item"
+import { getCartItemDetails } from "@/lib/get-cart-item-details"
 
 interface Props {
      className?: string
@@ -28,19 +32,30 @@ export const CartDrawer = ({ children, className }: PropsWithChildren<Props>) =>
                          </SheetTitle>
                     </SheetHeader>
 
+                    <div className="-mx-6 mt-5 overflow-auto flex-1">
+                         <CartDrawerItem
+                              id={1}
+                              imageUrl={"https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp"}
+                              name="Чоризо фреш"
+                              details={getCartItemDetails(2, 30, [{name: 'Цыпленок'}, {name: 'Сыр'}])}
+                              price={490}
+                              quantity={1}
+                         />
+                    </div>
+
                     <SheetFooter className="-mx-6 bg-white p-8">
                          <div className="w-full">
                               <TotalAmount />
-                         </div>
 
-                         <Link href="/cart">
-                              <Button
-                                   type="submit"
-                                   className="w-full h-12 text-base">
-                                   Оформить заказ
-                                   <ArrowRight className="w-5 ml-2" />
-                              </Button>
-                         </Link>
+                              <Link href="/cart">
+                                   <Button
+                                        type="submit"
+                                        className="w-full h-12 text-base">
+                                        Оформить заказ
+                                        <ArrowRight className="w-5 ml-2" />
+                                   </Button>
+                              </Link>
+                         </div>
                     </SheetFooter>
                </SheetContent>
           </Sheet>
