@@ -1,10 +1,11 @@
+import { cn } from "@/lib/utils";
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { Container, SearchInput } from "@/components/shared";
 import { Button } from "@/components/ui";
-import { cn } from "@/lib/utils";
-import { ArrowRight, ShoppingCart, User } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import { User } from "lucide-react";
+import { CartButton } from "@/components/shared/cart/cart-button";
 
 interface Props {
   className?: string;
@@ -36,23 +37,7 @@ export const Header: React.FC<Props> = ({ className }) => {
             Войти
           </Button>
 
-          <div>
-            <Button className="group relative">
-              <b>520 ₽</b>
-              <span className="mx-3 h-full w-[1px] bg-white/30" />
-              <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
-                <ShoppingCart size={16} className="relative" strokeWidth={2} />
-                <b>3</b>
-              </div>
-              <ArrowRight
-                size={20}
-                className={cn(
-                  "absolute right-5 -translate-x-2 opacity-0 transition",
-                  "duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-                )}
-              />
-            </Button>
-          </div>
+          <CartButton/>
         </div>
       </Container>
     </header>
